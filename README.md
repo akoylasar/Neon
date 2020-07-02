@@ -12,9 +12,9 @@ Just add the header to your project and you should be good to go! (Proper CMake 
 
 ## Running tests
 In the root project direcotry create a folder and run cmake:
-  ```mkdir Build ```
-  ```cd Build```
-  ```cmake -G"Your Favorite Compiler" ../Test```
+  * ```mkdir Build```
+  * ```cd Build```
+  * ```cmake -G"Your Favorite Compiler" ../Test```
 
 ## What you need
 Any decent C++11 compiler! 
