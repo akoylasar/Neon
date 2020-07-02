@@ -1,9 +1,9 @@
 # Neon
 [![Build Status](https://travis-ci.com/akoylasar/Neon.svg?branch=master)](https://travis-ci.com/akoylasar/Neon)
 
-Neon is a super simple single-header linear algebra library that contains necessary utilities tthat you need in your OpenGL graphics demos and small applications
-(originally I created this to be able to work on different projects and demos without having to rewrite similar code everytime).
-It is still under development (since it lacks some tests and proper documentation) and by no means it is compelete. 
+Neon is a super simple single-header linear algebra library that contains necessary utilities tthat you need in your OpenGL graphics demos and small applications.
+Originally I created this to be able to work on different projects and demos without having to rewrite similar code everytime.
+It is still under development (since it lacks some tests and proper documentation) and by no means it is complete. 
 Definitely not meant to be used in serious performance-critical applications (well.. at least not yet!).
 
 ## Usage
