@@ -23,7 +23,9 @@
  */
 
 #include "Neon.hpp"
+
 #include <cmath>
+
 #include "utest.h"
 
 #define IGNORE_UNUSED(x) (void)(x)
@@ -143,7 +145,7 @@
 
 using namespace Neon;
 
-DEFINE_FIXTURE(VecfTest);
+DEFINE_FIXTURE(VecfTest)
 
 UTEST_F(VecfTest, ctor)
 {
@@ -606,9 +608,7 @@ UTEST_F(VecfTest, rotate)
   ASSERT_NEARLY_EQ_V3F(result, expected);
 }
 
-DEFINE_FIXTURE(MatfTest);
-
-
+DEFINE_FIXTURE(MatfTest)
 
 UTEST_F(MatfTest, defaultCtor)
 {
@@ -1155,7 +1155,7 @@ UTEST_F(MatfTest, transpose)
   }
 }
 
-DEFINE_FIXTURE(MatrixTransformations);
+DEFINE_FIXTURE(MatrixTransformations)
 
 // TODO(Fouad): Test each function properly.
 UTEST_F(MatrixTransformations, temporary)
@@ -1204,4 +1204,4 @@ UTEST_F(MatrixTransformations, temporary)
 }
 
 
-UTEST_MAIN();
+UTEST_MAIN()

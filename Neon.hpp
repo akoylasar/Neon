@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include <cmath>
 #include <type_traits>
+#include <algorithm>
 
 namespace Neon
 {
