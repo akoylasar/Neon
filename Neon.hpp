@@ -1280,11 +1280,11 @@ namespace Neon
   inline Mat4<T> makeLookAt(const Vec3<T>& origin, const Vec3<T>& lookAt, const Vec3<T>& worldUp)
   {
     const Vec3<T> w = normalize(lookAt - origin);
-    const Vec3<T> u = normalize(Neon::cross(worldUp, w));
-    const Vec3<T> v = cross(w, u);
+    const Vec3<T> u = normalize(Neon::cross(w, worldUp));
+    const Vec3<T> v = cross(u, w);
     return Mat4<T>{u.x,  u.y,  u.z,  -Neon::dot(origin, u),
                    v.x,  v.y,  v.z,  -Neon::dot(origin, v),
-                   w.x,  w.y,  w.z,  -Neon::dot(origin, w),
+                   -w.x, -w.y, -w.z, Neon::dot(origin, w),
                    0,    0,    0,    1.0};
   }
   
