@@ -1203,5 +1203,30 @@ UTEST_F(MatrixTransformations, temporary)
   IGNORE_UNUSED(mat4Pers);
 }
 
+UTEST_F(MatrixTransformations, mvpInRhcToNdcInLhc)
+{
+  const Vec3f worldPoint{0};
+  const Vec3f worldUp{0, 1, 0};
+  const Vec3f cameraPoint{0, 0, 5};
+  
+  const float left = -1;
+  const float right = 1;
+  const float bottom = -1;
+  const float top = 1;
+  const float near = 0;
+  const float far = 10;
+  
+  const Mat4f lookAt = makeLookAt(cameraPoint, worldPoint, worldUp);
+  const Mat4f ortho = makeOrthographic(near, far, left, right, top, bottom);
+  
+  const Vec4f viewPoint = lookAt * Vec4f{worldPoint, 1};
+  const Vec4f expectedViewPoint{0, 0, -5, 1};
+  ASSERT_NEARLY_EQ_V4F(viewPoint, expectedViewPoint);
+  
+  const Vec4f vpPoint = ortho * viewPoint;
+  const Vec4f expectedVpPoint{0, 0, 0.5, 1.0};
+  ASSERT_NEARLY_EQ_V4F(vpPoint, expectedVpPoint);
+}
+
 
 UTEST_MAIN()

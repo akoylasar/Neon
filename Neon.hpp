@@ -33,6 +33,9 @@ namespace Neon
   constexpr double kPi = 3.1415926535897932384626433832795;
   constexpr double radToDeg = 180.0 / kPi;
   constexpr double degToRad = kPi / 180.0;
+  
+  template<typename T> struct Vec3;
+  template<typename T> struct Vec4;
 
   /* Vec2 */
   template <typename T>
@@ -46,6 +49,54 @@ namespace Neon
     
     Vec2(T _x, T _y) : x(_x), y(_y)
     {
+    }
+    
+    Vec2(const Vec2<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+    }
+    
+    explicit Vec2(const Vec3<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+    }
+    
+    explicit Vec2(const Vec4<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+    }
+    
+    Vec2& operator=(const Vec2<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+      }
+      return *this;
+    }
+    
+    Vec2& operator=(const Vec3<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+      }
+      return *this;
+    }
+    
+    Vec2& operator=(const Vec4<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+      }
+      return *this;
     }
     
     inline T& operator[](unsigned int i)
@@ -141,6 +192,59 @@ namespace Neon
     
     Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z)
     {
+    }
+    
+    explicit Vec3(const Vec2<T>& other, T z = 1)
+    {
+      x = other.x;
+      y = other.y;
+      this->z = z;
+    }
+    
+    Vec3(const Vec3<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+      z = other.z;
+    }
+    
+    explicit Vec3(const Vec4<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+      z = other.z;
+    }
+    
+    Vec3& operator=(const Vec2<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+      }
+      return *this;
+    }
+    
+    Vec3& operator=(const Vec3<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+      }
+      return *this;
+    }
+    
+    Vec3& operator=(const Vec4<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+      }
+      return *this;
     }
     
     inline T& operator[](unsigned int i)
@@ -241,6 +345,63 @@ namespace Neon
     
     Vec4(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w)
     {
+    }
+    
+    explicit Vec4(const Vec2<T>& other, T z = 0, T w = 0)
+    {
+      x = other.x;
+      y = other.y;
+      this->z = z;
+      this->w = w;
+    }
+    
+    explicit Vec4(const Vec3<T>& other, T w = 0)
+    {
+      x = other.x;
+      y = other.y;
+      z = other.z;
+      this->w = w;
+    }
+    
+    Vec4(const Vec4<T>& other)
+    {
+      x = other.x;
+      y = other.y;
+      z = other.z;
+      w = other.w;
+    }
+    
+    Vec4& operator=(const Vec2<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+      }
+      return *this;
+    }
+    
+    Vec4& operator=(const Vec3<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+      }
+      return *this;
+    }
+    
+    Vec4& operator=(const Vec4<T>& other)
+    {
+      if (this != &other)
+      {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+        w = other.w;
+      }
+      return *this;
     }
     
     inline T& operator[](unsigned int i)
@@ -1286,6 +1447,16 @@ namespace Neon
                    v.x,  v.y,  v.z,  -Neon::dot(origin, v),
                    -w.x, -w.y, -w.z, Neon::dot(origin, w),
                    0,    0,    0,    1.0};
+  }
+  
+  // LHC-to-RHC and vice versa.
+  template<typename T = float>
+  inline Mat4<T> makeInverseZ()
+  {
+    return Mat4<T>{1, 0, 0,  0,
+                   0, 1, 0,  0,
+                   0, 0, -1, 0,
+                   0, 0, 0,  1};
   }
   
   /* Common projections (Right-Handed) */
