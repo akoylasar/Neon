@@ -584,7 +584,7 @@ UTEST_F(VecfTest, reflect)
     const Vec3f v2{0, 1, 0};
     const Vec3f result = reflect(v1, v2);
     const Vec3f expected{1, 1, 0};
-    ASSERT_NEARLY_EQ_V2F(result, expected);
+    ASSERT_NEARLY_EQ_V3F(result, expected);
   }
 }
 
@@ -652,22 +652,22 @@ UTEST_F(MatfTest, defaultCtor)
   }
 }
 
-UTEST_F(MatfTest, vectorCtor)
+UTEST_F(MatfTest, colCtor)
 {
   {
-    const Vec2f v1{1, 2};
-    const Vec2f v2{10, 20};
-    const Mat2f m{v1, v2};
+    const Vec2f col1{1, 2};
+    const Vec2f col2{10, 20};
+    const Mat2f m{col1, col2};
     ASSERT_EQ(m.d[0][0], 1);
     ASSERT_EQ(m.d[0][1], 2);
     ASSERT_EQ(m.d[1][0], 10);
     ASSERT_EQ(m.d[1][1], 20);
   }
   {
-    const Vec3f v1{1, 2, 3};
-    const Vec3f v2{10, 20, 30};
-    const Vec3f v3{100, 200, 300};
-    const Mat3f m{v1, v2, v3};
+    const Vec3f col1{1, 2, 3};
+    const Vec3f col2{10, 20, 30};
+    const Vec3f col3{100, 200, 300};
+    const Mat3f m{col1, col2, col3};
     ASSERT_EQ(m.d[0][0], 1);
     ASSERT_EQ(m.d[0][1], 2);
     ASSERT_EQ(m.d[0][2], 3);
@@ -679,11 +679,11 @@ UTEST_F(MatfTest, vectorCtor)
     ASSERT_EQ(m.d[2][2], 300);
   }
   {
-    const Vec4f v1{1, 2, 3, 4};
-    const Vec4f v2{10, 20, 30, 40};
-    const Vec4f v3{100, 200, 300, 400};
-    const Vec4f v4{1000, 2000, 3000, 4000};
-    const Mat4f m{v1, v2, v3, v4};
+    const Vec4f col1{1, 2, 3, 4};
+    const Vec4f col2{10, 20, 30, 40};
+    const Vec4f col3{100, 200, 300, 400};
+    const Vec4f col4{1000, 2000, 3000, 4000};
+    const Mat4f m{col1, col2, col3, col4};
     ASSERT_EQ(m.d[0][0], 1);
     ASSERT_EQ(m.d[0][1], 2);
     ASSERT_EQ(m.d[0][2], 3);
@@ -810,67 +810,104 @@ UTEST_F(MatfTest, copyAssignment)
   }
 }
 
-UTEST_F(MatfTest, subscript)
+UTEST_F(MatfTest, subscriptColCtor)
 {
   {
     // Read.
-    const Vec2f v1{1, 2};
-    const Vec2f v2{10, 20};
-    Mat2f m{v1, v2};
-    ASSERT_EQ_V2F(m[0], v1);
-    ASSERT_EQ_V2F(m[1], v2);
+    const Vec2f col1{1, 2};
+    const Vec2f col2{10, 20};
+    Mat2f m{col1, col2};
+    ASSERT_EQ_V2F(m[0], col1);
+    ASSERT_EQ_V2F(m[1], col2);
     // Write
-    const Vec2f nv1{-1, -2};
-    const Vec2f nv2{-10, -20};
-    m[0] = nv1;
-    m[1] = nv2;
-    ASSERT_EQ_V2F(m[0], nv1);
-    ASSERT_EQ_V2F(m[1], nv2);
+    const Vec2f nCol1{-1, -2};
+    const Vec2f nCol2{-10, -20};
+    m[0] = nCol1;
+    m[1] = nCol2;
+    ASSERT_EQ_V2F(m[0], nCol1);
+    ASSERT_EQ_V2F(m[1], nCol2);
   }
   {
     // Read.
-    const Vec3f v1{1, 2, 3};
-    const Vec3f v2{10, 20, 30};
-    const Vec3f v3{100, 200, 300};
-    Mat3f m{v1, v2, v3};
-    ASSERT_EQ_V2F(m[0], v1);
-    ASSERT_EQ_V2F(m[1], v2);
-    ASSERT_EQ_V2F(m[2], v3);
+    const Vec3f col1{1, 2, 3};
+    const Vec3f col2{10, 20, 30};
+    const Vec3f col3{100, 200, 300};
+    Mat3f m{col1, col2, col3};
+    ASSERT_EQ_V3F(m[0], col1);
+    ASSERT_EQ_V3F(m[1], col2);
+    ASSERT_EQ_V3F(m[2], col3);
     // Write
-    const Vec3f nv1{-1, -2, -3};
-    const Vec3f nv2{-10, -20, -30};
-    const Vec3f nv3{-100, -200, -300};
-    m[0] = nv1;
-    m[1] = nv2;
-    m[2] = nv3;
-    ASSERT_EQ_V2F(m[0], nv1);
-    ASSERT_EQ_V2F(m[1], nv2);
-    ASSERT_EQ_V2F(m[2], nv3);
+    const Vec3f nCol1{-1, -2, -3};
+    const Vec3f nCol2{-10, -20, -30};
+    const Vec3f nCol3{-100, -200, -300};
+    m[0] = nCol1;
+    m[1] = nCol2;
+    m[2] = nCol3;
+    ASSERT_EQ_V3F(m[0], nCol1);
+    ASSERT_EQ_V3F(m[1], nCol2);
+    ASSERT_EQ_V3F(m[2], nCol3);
   }
   {
     // Read.
-    const Vec4f v1{1, 2, 3, 4};
-    const Vec4f v2{10, 20, 30, 40};
-    const Vec4f v3{100, 200, 300, 400};
-    const Vec4f v4{1000, 2000, 3000, 4000};
-    Mat4f m{v1, v2, v3, v4};
-    ASSERT_EQ_V2F(m[0], v1);
-    ASSERT_EQ_V2F(m[1], v2);
-    ASSERT_EQ_V2F(m[2], v3);
-    ASSERT_EQ_V2F(m[3], v4);
+    const Vec4f col1{1, 2, 3, 4};
+    const Vec4f col2{10, 20, 30, 40};
+    const Vec4f col3{100, 200, 300, 400};
+    const Vec4f col4{1000, 2000, 3000, 4000};
+    Mat4f m{col1, col2, col3, col4};
+    ASSERT_EQ_V4F(m[0], col1);
+    ASSERT_EQ_V4F(m[1], col2);
+    ASSERT_EQ_V4F(m[2], col3);
+    ASSERT_EQ_V4F(m[3], col4);
     // Write
-    const Vec4f nv1{-1, -2, -3, -4};
-    const Vec4f nv2{-10, -20, -30, -40};
-    const Vec4f nv3{-100, -200, -300, -400};
-    const Vec4f nv4{-1000, -2000, -3000, -4000};
-    m[0] = nv1;
-    m[1] = nv2;
-    m[2] = nv3;
-    m[3] = nv4;
-    ASSERT_EQ_V2F(m[0], nv1);
-    ASSERT_EQ_V2F(m[1], nv2);
-    ASSERT_EQ_V2F(m[2], nv3);
-    ASSERT_EQ_V2F(m[3], nv4);
+    const Vec4f nCol1{-1, -2, -3, -4};
+    const Vec4f nCol2{-10, -20, -30, -40};
+    const Vec4f nCol3{-100, -200, -300, -400};
+    const Vec4f nCol4{-1000, -2000, -3000, -4000};
+    m[0] = nCol1;
+    m[1] = nCol2;
+    m[2] = nCol3;
+    m[3] = nCol4;
+    ASSERT_EQ_V4F(m[0], nCol1);
+    ASSERT_EQ_V4F(m[1], nCol2);
+    ASSERT_EQ_V4F(m[2], nCol3);
+    ASSERT_EQ_V4F(m[3], nCol4);
+  }
+}
+
+UTEST_F(MatfTest, subscript)
+{
+  {
+    Mat2f m{1, 2,
+            3, 4};
+    const Vec2f col1{1, 3};
+    const Vec2f col2{2, 4};
+    ASSERT_EQ_V2F(m[0], col1);
+    ASSERT_EQ_V2F(m[1], col2);
+  }
+  {
+    Mat3f m{1, 2, 3,
+            4, 5, 6,
+            7, 8, 9};
+    const Vec3f col1{1, 4, 7};
+    const Vec3f col2{2, 5, 8};
+    const Vec3f col3{3, 6, 9};
+    ASSERT_EQ_V3F(m[0], col1);
+    ASSERT_EQ_V3F(m[1], col2);
+    ASSERT_EQ_V3F(m[2], col3);
+  }
+  {
+    Mat4f m{1,  2,  3,  4,
+            5,  6,  7,  8,
+            9,  10, 11, 12,
+            13, 14, 15, 16};
+    const Vec4f col1{1, 5, 9, 13};
+    const Vec4f col2{2, 6, 10, 14};
+    const Vec4f col3{3, 7, 11, 15};
+    const Vec4f col4{4, 8, 12, 16};
+    ASSERT_EQ_V4F(m[0], col1);
+    ASSERT_EQ_V4F(m[1], col2);
+    ASSERT_EQ_V4F(m[2], col3);
+    ASSERT_EQ_V4F(m[3], col4);
   }
 }
 
@@ -999,7 +1036,7 @@ UTEST_F(MatfTest, multiplyVector)
     const Vec3f v{0.1f, 0.4f, 0.9f};
     const Vec3f result = m * v;
     const Vec3f expected{3.6f, 7.8f, 12.0f};
-    ASSERT_NEARLY_EQ_V2F(result, expected);
+    ASSERT_NEARLY_EQ_V3F(result, expected);
   }
   {
     const Mat4f m{1,  2,  3,  4,
@@ -1009,7 +1046,7 @@ UTEST_F(MatfTest, multiplyVector)
     const Vec4f v{0.1f, 0.4f, 0.6f, 0.9f};
     const Vec4f result = m * v;
     const Vec4f expected{6.3f, 14.3f, 22.3f, 30.3f};
-    ASSERT_NEARLY_EQ_V2F(result, expected);
+    ASSERT_NEARLY_EQ_V4F(result, expected);
   }
 }
 
@@ -1227,6 +1264,5 @@ UTEST_F(MatrixTransformations, mvpInRhcToNdcInLhc)
   const Vec4f expectedVpPoint{0, 0, 0.5, 1.0};
   ASSERT_NEARLY_EQ_V4F(vpPoint, expectedVpPoint);
 }
-
 
 UTEST_MAIN()

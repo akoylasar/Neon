@@ -649,17 +649,17 @@ namespace Neon
       d[1][0] = 0; d[1][1] = t;
     }
     
-    Mat2(const Vec2<T>& v1, const Vec2<T>& v2)
+    Mat2(const Vec2<T>& col1, const Vec2<T>& col2)
     {
-      d[0][0] = v1.x; d[0][1] = v1.y;
-      d[1][0] = v2.x; d[1][1] = v2.y;
+      d[0][0] = col1.x; d[0][1] = col1.y;
+      d[1][0] = col2.x; d[1][1] = col2.y;
     }
     
-    Mat2(T v1x, T v2x,
-         T v1y, T v2y)
+    Mat2(T col1x, T col2x,
+         T col1y, T col2y)
     {
-      d[0][0] = v1x; d[0][1] = v1y;
-      d[1][0] = v2x; d[1][1] = v2y;
+      d[0][0] = col1x; d[0][1] = col1y;
+      d[1][0] = col2x; d[1][1] = col2y;
     }
     
     Mat2(const Mat2<T>& other)
@@ -678,14 +678,14 @@ namespace Neon
       return *this;
     }
     
-    inline Vec2<T>& operator[](unsigned int column)
+    inline Vec2<T>& operator[](unsigned int col)
     {
-      return *reinterpret_cast<Vec2<T>*>(d[column]);
+      return *reinterpret_cast<Vec2<T>*>(d[col]);
     }
     
-    inline const Vec2<T>& operator[](unsigned int column) const
+    inline const Vec2<T>& operator[](unsigned int col) const
     {
-      return *reinterpret_cast<const Vec2<T>*>(d[column]);
+      return *reinterpret_cast<const Vec2<T>*>(d[col]);
     }
     
     inline T& operator()(unsigned int row, unsigned int col)
@@ -799,20 +799,20 @@ namespace Neon
       d[2][0] = 0; d[2][1] = 0; d[2][2] = t;
     }
     
-    Mat3(const Vec3<T>& v1, const Vec3<T>& v2, const Vec3<T>& v3)
+    Mat3(const Vec3<T>& col1, const Vec3<T>& col2, const Vec3<T>& col3)
     {
-      d[0][0] = v1.x; d[0][1] = v1.y; d[0][2] = v1.z;
-      d[1][0] = v2.x; d[1][1] = v2.y; d[1][2] = v2.z;
-      d[2][0] = v3.x; d[2][1] = v3.y; d[2][2] = v3.z;
+      d[0][0] = col1.x; d[0][1] = col1.y; d[0][2] = col1.z;
+      d[1][0] = col2.x; d[1][1] = col2.y; d[1][2] = col2.z;
+      d[2][0] = col3.x; d[2][1] = col3.y; d[2][2] = col3.z;
     }
     
-    Mat3(T v1x, T v2x, T v3x,
-         T v1y, T v2y, T v3y,
-         T v1z, T v2z, T v3z)
+    Mat3(T col1x, T col2x, T col3x,
+         T col1y, T col2y, T col3y,
+         T col1z, T col2z, T col3z)
     {
-      d[0][0] = v1x; d[0][1] = v1y; d[0][2] = v1z;
-      d[1][0] = v2x; d[1][1] = v2y; d[1][2] = v2z;
-      d[2][0] = v3x; d[2][1] = v3y; d[2][2] = v3z;
+      d[0][0] = col1x; d[0][1] = col1y; d[0][2] = col1z;
+      d[1][0] = col2x; d[1][1] = col2y; d[1][2] = col2z;
+      d[2][0] = col3x; d[2][1] = col3y; d[2][2] = col3z;
     }
     
     Mat3(const Mat3<T>& other)
@@ -840,14 +840,14 @@ namespace Neon
       return *this;
     }
     
-    inline Vec3<T>& operator[](unsigned int column)
+    inline Vec3<T>& operator[](unsigned int col)
     {
-      return *reinterpret_cast<Vec3<T>*>(d[column]);
+      return *reinterpret_cast<Vec3<T>*>(d[col]);
     }
     
-    inline const Vec3<T>& operator[](unsigned int column) const
+    inline const Vec3<T>& operator[](unsigned int col) const
     {
-      return *reinterpret_cast<const Vec3<T>*>(d[column]);
+      return *reinterpret_cast<const Vec3<T>*>(d[col]);
     }
     
     inline T& operator()(unsigned int row, unsigned int col)
@@ -974,23 +974,23 @@ namespace Neon
       d[3][0] = 0; d[3][1] = 0; d[3][2] = 0; d[3][3] = t;
     }
     
-    Mat4(const Vec4<T>& v1, const Vec4<T>& v2, const Vec4<T>& v3, const Vec4<T>& v4)
+    Mat4(const Vec4<T>& col1, const Vec4<T>& col2, const Vec4<T>& col3, const Vec4<T>& col4)
     {
-      d[0][0] = v1.x; d[0][1] = v1.y; d[0][2] = v1.z; d[0][3] = v1.w;
-      d[1][0] = v2.x; d[1][1] = v2.y; d[1][2] = v2.z; d[1][3] = v2.w;
-      d[2][0] = v3.x; d[2][1] = v3.y; d[2][2] = v3.z; d[2][3] = v3.w;
-      d[3][0] = v4.x; d[3][1] = v4.y; d[3][2] = v4.z; d[3][3] = v4.w;
+      d[0][0] = col1.x; d[0][1] = col1.y; d[0][2] = col1.z; d[0][3] = col1.w;
+      d[1][0] = col2.x; d[1][1] = col2.y; d[1][2] = col2.z; d[1][3] = col2.w;
+      d[2][0] = col3.x; d[2][1] = col3.y; d[2][2] = col3.z; d[2][3] = col3.w;
+      d[3][0] = col4.x; d[3][1] = col4.y; d[3][2] = col4.z; d[3][3] = col4.w;
     }
     
-    Mat4(T v1x, T v2x, T v3x, T v4x,
-         T v1y, T v2y, T v3y, T v4y,
-         T v1z, T v2z, T v3z, T v4z,
-         T v1w, T v2w, T v3w, T v4w)
+    Mat4(T col1x, T col2x, T col3x, T col4x,
+         T col1y, T col2y, T col3y, T col4y,
+         T col1z, T col2z, T col3z, T col4z,
+         T col1w, T col2w, T col3w, T col4w)
     {
-      d[0][0] = v1x; d[0][1] = v1y; d[0][2] = v1z; d[0][3] = v1w;
-      d[1][0] = v2x; d[1][1] = v2y; d[1][2] = v2z; d[1][3] = v2w;
-      d[2][0] = v3x; d[2][1] = v3y; d[2][2] = v3z; d[2][3] = v3w;
-      d[3][0] = v4x; d[3][1] = v4y; d[3][2] = v4z; d[3][3] = v4w;
+      d[0][0] = col1x; d[0][1] = col1y; d[0][2] = col1z; d[0][3] = col1w;
+      d[1][0] = col2x; d[1][1] = col2y; d[1][2] = col2z; d[1][3] = col2w;
+      d[2][0] = col3x; d[2][1] = col3y; d[2][2] = col3z; d[2][3] = col3w;
+      d[3][0] = col4x; d[3][1] = col4y; d[3][2] = col4z; d[3][3] = col4w;
     }
     
     Mat4(const Mat4<T>& other)
@@ -1029,14 +1029,14 @@ namespace Neon
       return *this;
     }
     
-    inline Vec4<T>& operator[](unsigned int column)
+    inline Vec4<T>& operator[](unsigned int col)
     {
-      return *reinterpret_cast<Vec4<T>*>(d[column]);
+      return *reinterpret_cast<Vec4<T>*>(d[col]);
     }
     
-    inline const Vec4<T>& operator[](unsigned int column) const
+    inline const Vec4<T>& operator[](unsigned int col) const
     {
-      return *reinterpret_cast<const Vec4<T>*>(d[column]);
+      return *reinterpret_cast<const Vec4<T>*>(d[col]);
     }
     
     inline T& operator()(unsigned int row, unsigned int col)
@@ -1436,7 +1436,6 @@ namespace Neon
                    0, 0, 0,  1};
   }
   
-  // Builds a Right-Handed look-at matrix.
   template<typename T = float>
   inline Mat4<T> makeLookAt(const Vec3<T>& origin, const Vec3<T>& lookAt, const Vec3<T>& worldUp)
   {
@@ -1458,8 +1457,6 @@ namespace Neon
                    0, 0, -1, 0,
                    0, 0, 0,  1};
   }
-  
-  /* Common projections (Right-Handed) */
   
   enum class NdcDepth
   {
@@ -1553,9 +1550,6 @@ namespace Neon
                      0,              0,      -1,          0};
     }
   }
-  
-  // https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping
-  // https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/building-basic-perspective-projection-matrix
   
   template <typename T = float, NdcDepth D = NdcDepth::ZeroToOne>
   inline Mat4<T> makeFrustum(T near, T far, T left, T right, T top, T bottom)
